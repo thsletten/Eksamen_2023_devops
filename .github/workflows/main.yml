@@ -33,7 +33,7 @@ jobs:
             --capabilities CAPABILITY_IAM CAPABILITY_AUTO_EXPAND --no-fail-on-empty-changeset --resolve-s3
           fi
           env:
-            AWS_ACCESS_KEY_ID: ${{ secrets.AWS__SECRET_ACCESS_KEY_ID }}
+            AWS_SECRET_ACCESS_KEY_ID: ${{ secrets.AWS__SECRET_ACCESS_KEY_ID }}
             AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}  
             AWS_REGION: eu-west-1
 
