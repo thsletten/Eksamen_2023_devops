@@ -30,8 +30,9 @@ jobs:
         run: |
           if [ "${{ github.ref }}" = "refs/heads/main" ]; then
           sam deploy --region eu-west-1 --template-file eksamen_2023-main/kjell/template.yaml --stack-name 2032sinStack 
-          --capabilities CAPABILITY_IAM CAPABILITY_AUTO_EXPAND --no-fail-on-empty-changeset --s3-bucket 2032sinBucket
+          --capabilities CAPABILITY_IAM CAPABILITY_AUTO_EXPAND --no-fail-on-empty-changeset --resolve-s3
           fi
+
 
 
 
