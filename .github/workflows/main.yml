@@ -1,33 +1,34 @@
-name: SAM Application CI/CD Pipeline
+name: SAM Build and Deploy
 
 on:
   push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+    branches:
+      - main
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Repository
+      - name: Checkout Code
         uses: actions/checkout@v2
 
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
-          python-version: 3.9
+          python-version: 3.8
 
-      - name: Install SAM CLI
-        run: pip install aws-sam-cli
+      - name: Install dependencies
+        run: |
+          pip install awscli
+          pip install aws-sam-cli
 
-      - name: Build SAM Application
+      - name: Build SAM application
         run: sam build
 
-      - name: Deploy SAM Application
-        run: sam deploy --stack-name 2032sinStack --capabilities CAPABILITY_IAM --no-fail-on-empty-changeset
+      - name: Deploy SAM application
+        run: sam deploy --stack-name your-stack-name --capabilities CAPABILITY_IAM CAPABILITY_AUTO_EXPAND --no-fail-on-empty-changeset
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_REGION: 'eu-west-1'
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_ACCESS_KEY }}
+          AWS_REGION: your-aws-region
