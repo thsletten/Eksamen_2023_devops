@@ -23,6 +23,11 @@ jobs:
           pip install awscli
           pip install aws-sam-cli
 
+      - name: Create a temporary S3 bucket
+        run: |
+          export SAM_TEMP_BUCKET=$(aws s3api create-bucket --bucket sam-temp-bucket-$(date +%s) --region eu-west-1 --output text)
+          echo "Temporary SAM bucket created: $SAM_TEMP_BUCKET"
+
       - name: Build SAM application
         run: sam build --template-file eksamen_2023-main/kjell/template.yaml
 
@@ -30,9 +35,14 @@ jobs:
         run: |
           if [ "${{ github.ref }}" = "refs/heads/main" ]; then
             sam deploy --region eu-west-1 --template-file eksamen_2023-main/kjell/template.yaml --stack-name 2032sinStack 
-            --capabilities CAPABILITY_IAM CAPABILITY_AUTO_EXPAND --no-fail-on-empty-changeset --resolve-s3
+            --capabilities CAPABILITY_IAM CAPABILITY_AUTO_EXPAND --no-fail-on-empty-changeset --s3-bucket $SAM_TEMP_BUCKET
           fi
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_ACCESS_KEY }}  
           AWS_REGION: eu-west-1
+
+      - name: Clean up temporary S3 bucket
+        run: |
+          aws s3 rb s3://$SAM_TEMP_BUCKET --force
+
