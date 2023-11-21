@@ -27,7 +27,7 @@ jobs:
         run: sam build
 
       - name: Deploy SAM application
-        run: sam deploy --stack-name your-stack-name --capabilities CAPABILITY_IAM CAPABILITY_AUTO_EXPAND --no-fail-on-empty-changeset
+        run: sam deploy --stack-name 2023sinStack --capabilities CAPABILITY_IAM CAPABILITY_AUTO_EXPAND --no-fail-on-empty-changeset
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_ACCESS_KEY }}
