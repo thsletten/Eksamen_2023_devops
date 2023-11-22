@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      BUCKET_NAME: "2032sinbucketTEST"  
+      BUCKET_NAME: "2032sinbucket"  
 
     steps:
       - name: Install Docker
