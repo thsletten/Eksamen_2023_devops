@@ -37,7 +37,7 @@ jobs:
 
       - name: Package SAM application
         run: |
-          sam package --output-template-file packaged.yaml --s3-bucket 2032sinBucket --region eu-west-1
+          sam package --output-template-file packaged.yaml --s3-bucket 2032sinbucket --region eu-west-1
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_SECRET_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -62,7 +62,7 @@ jobs:
         run: docker build -t my-python-app .
 
       - name: Run Docker image
-        run: docker run -e AWS_ACCESS_KEY_ID=${{ secrets.AWS_SECRET_ACCESS_KEY_ID }} -e AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }} -e BUCKET_NAME=2032sinBucket my-python-app
+        run: docker run -e AWS_ACCESS_KEY_ID=${{ secrets.AWS_SECRET_ACCESS_KEY_ID }} -e AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }} -e BUCKET_NAME=2032sinbucket my-python-app
 
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_SECRET_ACCESS_KEY_ID }}
