@@ -57,6 +57,7 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_REGION: eu-west-1
 
+
       - name: Build Docker image
         run: docker build -t my-python-app .
 
