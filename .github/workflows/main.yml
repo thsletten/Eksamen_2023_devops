@@ -35,23 +35,31 @@ jobs:
       - name: Build SAM application
         run: sam build --template-file eksamen_2023-main/kjell/template.yaml
 
+      - name: Package SAM application
+        run: |
+          sam package --output-template-file packaged.yaml --s3-bucket 2032sinBucket
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_SECRET_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
       - name: Deploy SAM application
         run: |
           if [ "${{ github.ref }}" = "refs/heads/main" ]; then
-            sam deploy --region eu-west-1 --template-file eksamen_2023-main/kjell/template.yaml --stack-name 2032sinStack 
-            --capabilities CAPABILITY_IAM CAPABILITY_AUTO_EXPAND --no-fail-on-empty-changeset --s3-bucket 2032sinbucket
+            sam deploy --template-file packaged.yaml --region eu-west-1 --stack-name 2032sinStack 
+            --capabilities CAPABILITY_IAM CAPABILITY_AUTO_EXPAND --no-fail-on-empty-changeset
           fi
 
       - name: Build Docker image
         run: docker build -t my-python-app .
 
       - name: Run Docker image
-        run: docker run -e AWS_ACCESS_KEY_ID=${{ secrets.AWS_SECRET_ACCESS_KEY_ID }} -e AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }} -e BUCKET_NAME=2032sinbucket my-python-app
+        run: docker run -e AWS_ACCESS_KEY_ID=${{ secrets.AWS_SECRET_ACCESS_KEY_ID }} -e AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }} -e BUCKET_NAME=2032sinBucket my-python-app
 
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_SECRET_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}  
           AWS_REGION: eu-west-1
+
 
 
 
