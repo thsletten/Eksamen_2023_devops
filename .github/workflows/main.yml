@@ -32,23 +32,23 @@ jobs:
           pip install awscli
           pip install aws-sam-cli
 
-      # No need to run sam build if you're using an existing template.yaml
-      # - name: Build SAM application
-      #   run: sam build --template-file eksamen_2023-main/kjell/template.yaml
+      - name: Deploy SAM application
+        run: |
+          if [ "${{ github.ref }}" = "refs/heads/main" ]; then
+            sam deploy --template-file packaged.yaml --region eu-west-1 --stack-name kand2032stack 
+            --capabilities CAPABILITY_IAM CAPABILITY_AUTO_EXPAND --no-fail-on-empty-changeset
+          fi
+          
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_SECRET_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_REGION: eu-west-1
 
-      # No need to package if using an existing template.yaml
-      # - name: Package SAM application
-      #   run: |
-      #     sam package --output-template-file packaged.yaml --s3-bucket 2032sinbucket --region eu-west-1
-      #   env:
-      #     AWS_ACCESS_KEY_ID: ${{ secrets.AWS_SECRET_ACCESS_KEY_ID }}
-      #     AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-      #     AWS_REGION: eu-west-1
 
       - name: Deploy SAM application
         run: |
           if [ "${{ github.ref }}" = "refs/heads/main" ]; then
-            sam deploy --template-file eksamen_2023-main/kjell/template.yaml --region eu-west-1 --stack-name kand2032stack 
+            sam deploy --template-file packaged.yaml --region eu-west-1 --stack-name kand2032stack 
             --capabilities CAPABILITY_IAM CAPABILITY_AUTO_EXPAND --no-fail-on-empty-changeset
           fi
         env:
@@ -56,16 +56,17 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_REGION: eu-west-1
 
+
       - name: Build Docker image
         run: docker build -t my-python-app .
 
       - name: Run Docker image
         run: docker run -e AWS_ACCESS_KEY_ID=${{ secrets.AWS_SECRET_ACCESS_KEY_ID }} -e AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }} -e BUCKET_NAME=2032sinbucket my-python-app
+
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_SECRET_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}  
           AWS_REGION: eu-west-1
-
 
 
 
