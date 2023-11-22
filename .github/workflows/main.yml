@@ -1,0 +1,61 @@
+name: SAM Build and Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    env:
+      BUCKET_NAME: "2032sinbucket"  
+
+    steps:
+      - name: Install Docker
+        run: |
+          sudo apt-get update
+          sudo apt-get install apt-transport-https ca-certificates curl software-properties-common
+          curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+          sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+          sudo apt-get update
+          sudo apt-get install docker-ce
+
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+
+      - name: Install dependencies
+        run: |
+          pip install awscli
+          pip install aws-sam-cli
+
+      - name: Deploy SAM application
+        run: |
+          if [ "${{ github.ref }}" = "refs/heads/main" ]; then
+          sam deploy --template-file eksamen_2023-main/kjell/template.yaml --region eu-west-1 --stack-name kand2032stack --capabilities CAPABILITY_IAM CAPABILITY_AUTO_EXPAND --no-fail-on-empty-changeset --s3-bucket $BUCKET_NAME
+          fi
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_SECRET_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_REGION: eu-west-1
+
+      - name: Build Docker image
+        run: docker build -t my-python-app .
+
+      - name: Run Docker image
+        run: docker run -e AWS_ACCESS_KEY_ID=${{ secrets.AWS_SECRET_ACCESS_KEY_ID }} -e AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }} -e BUCKET_NAME=$BUCKET_NAME my-python-app
+
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_SECRET_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}  
+          AWS_REGION: eu-west-1
+
+
+
+
