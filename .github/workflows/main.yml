@@ -39,17 +39,18 @@ jobs:
         run: |
           if [ "${{ github.ref }}" = "refs/heads/main" ]; then
             sam deploy --region eu-west-1 --template-file eksamen_2023-main/kjell/template.yaml --stack-name 2032sinStack 
-            --capabilities CAPABILITY_IAM CAPABILITY_AUTO_EXPAND --no-fail-on-empty-changeset --s3-bucket 2032sinBucket
+            --capabilities CAPABILITY_IAM CAPABILITY_AUTO_EXPAND --no-fail-on-empty-changeset --s3-bucket <din_S3_bøtte>
           fi
 
       - name: Build Docker image
         run: docker build -t my-python-app .
 
       - name: Run Docker image
-        run: docker run -e AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }} -e AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }} -e BUCKET_NAME=your_bucket_name my-python-app
+        run: docker run -e AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }} -e AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }} -e BUCKET_NAME=2032sinBucket my-python-app
 
         env:
-          AWS_SECRET_ACCESS_KEY_ID: ${{ secrets.AWS__SECRET_ACCESS_KEY_ID }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}  
           AWS_REGION: eu-west-1
+
 
