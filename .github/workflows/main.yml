@@ -35,13 +35,6 @@ jobs:
       - name: Build SAM application
         run: sam build --template-file eksamen_2023-main/kjell/template.yaml
 
-      - name: Create S3 bucket
-        run: |
-          aws s3api create-bucket --bucket 2032sinbucket --region eu-west-1 --create-bucket-configuration LocationConstraint=eu-west-1
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_SECRET_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-
       - name: Deploy SAM application
         run: |
           if [ "${{ github.ref }}" = "refs/heads/main" ]; then
@@ -59,7 +52,6 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_SECRET_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}  
           AWS_REGION: eu-west-1
-
 
 
 
