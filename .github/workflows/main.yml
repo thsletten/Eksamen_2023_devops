@@ -48,7 +48,7 @@ jobs:
 
 
       - name: Build Docker image
-        run: cd /eksamen_2023-main/kjell/hello_world
+        run: cd /eksamen_2023-main/kjell/hello_world;
              docker build -t my-python-app .
               
 
