@@ -12,7 +12,7 @@ def lambda_handler(event, context):
 
     # List all objects in the S3 bucket
     paginator = s3_client.get_paginator('list_objects_v2')
-    rekognition_results = []  # Store the results
+    rekognition_results = []  
 
     for page in paginator.paginate(Bucket=BUCKET_NAME):
         for obj in page.get('Contents', []):
@@ -25,7 +25,7 @@ def lambda_handler(event, context):
                     }
                 },
                 SummarizationAttributes={
-                    'MinConfidence': 80,  # Confidence level threshold
+                    'MinConfidence': 80,  
                     'RequiredEquipmentTypes': ['FACE_COVER']
                 }
             )

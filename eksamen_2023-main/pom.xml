@@ -42,7 +42,22 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-    </dependencies>
+    
+    <!-- Micrometer Core Dependency -->
+    <dependency>
+        <groupId>io.micrometer</groupId>
+        <artifactId>micrometer-core</artifactId>
+        <version>1.8.0</version> <!-- Erstatt med riktig versjon -->
+    </dependency>
+
+    <!-- Micrometer Registry for CloudWatch -->
+    <dependency>
+        <groupId>io.micrometer</groupId>
+        <artifactId>micrometer-registry-cloudwatch</artifactId>
+        <version>1.8.0</version> 
+    </dependency>
+</dependencies>
+
 
     <build>
         <plugins>
