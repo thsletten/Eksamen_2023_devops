@@ -22,7 +22,16 @@ Scrum/Smidig og DevOps er begge viktige metodikker for å utvikle programvarer, 
 
 Et eksempel på hvordan de er forskjellige kan være hvordan de håndterer sammenslåing av kode. I Scrum/Agile kan en del av prosessen være å sette av 1-2 dager på slutten av sprinten kun til merging av all koden som er produsert. Mens i DevOps vil dette skje jevnt og trutt ettersom man produserer kode.
 
-Begge metodene er nyttige i ulike utviklingssituasjoner. Scrum/Smidig passer best i prosjekter med hyppige og raske endringer og hvor kundefeedback er sentral, mens DevOps er ideell for større prosjekter som krever raske oppdateringer, og hvor det er fokus på effektivitet og sikkerhet. Valget mellom disse metodikkene avhenger av prosjektets natur, teamets oppbygging, og mål.+
+Begge metodene er nyttige i ulike utviklingssituasjoner. Scrum/Smidig passer best i prosjekter med hyppige og raske endringer og hvor kundefeedback er sentral, mens DevOps er ideell for større prosjekter som krever raske oppdateringer, og hvor det er fokus på effektivitet og sikkerhet. Valget mellom disse metodikkene avhenger av prosjektets natur, teamets oppbygging, og mål.
+
+Oppgave C. Det andre prinsippet - feedback.
+
+Når man implementerer ny funksjonalitet i en applikasjon, er det viktig å lage et feedback system for å sikre at funksjonaliteten møter brukernes krav. Dette kan man gjøre ved hjelp av brukertesting, hvor representative brukere gir direkte tilbakemeldinger på funksjonaliteten. I tillegg til brukertesting kan man bruke surveys og spørreskjemaer for å samle detaljert og strukturert feedback. Analyseverktøy integrert i applikasjonen kan også bidra til å samle kvantitative data om brukerinteraksjoner, som kan gi innsikt i hvordan funksjonaliteten faktisk brukes.
+
+Bruk av feedback er viktig for forbedring av funksjonaliteten. Ved å integrere brukernes tilbakemeldinger i utviklingsprosessen kan justeringer og forbedringer gjøres for å bedre tilpasse funksjonaliteten til brukernes behov og forventninger. Feedback bør integreres både under utvikling gjennom prototyper og etter lansering, for kontinuerlig å overvåke og forbedre funksjonaliteten. Dette sikrer at produktet forblir relevant og verdifullt for brukerne over tid.
+
+
+
 
 
 
