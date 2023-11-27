@@ -1,6 +1,14 @@
 # EksamenRep_2023
 Eksamen i dev ops i skyende 2023
 
+note: Jeg hadde problemer og fikk feilen:  "403 feil fra  spring-boot applikasjonen"
+når jeg skulle teste applikasjonen når jeg beggynte på oppgave 4. Jeg så det ble lagt ut en melding om denne feilen men jeg fikk ikke løsnigen til å fungere. Til torss for dette tror jeg at jeg har klart å løse oppgavene til ett vis nivå.
+
+Dette er min løsning på eksamen oppgaven:
+
+
+
+
 oppgave 1: FORKLARIN: 
 
 1. **Fork Repository**: Klikk på 'Fork'-knappen på hovedsiden til repositoryet.
