@@ -1,6 +1,31 @@
 # EksamenRep_2023
 Eksamen i dev ops i skyende 2023
 
+oppgave 1: FORKLARIN: 
+
+1. **Fork Repository**: Klikk på 'Fork'-knappen på hovedsiden til repositoryet.
+2. **Aktiver GitHub Actions**: Gå til 'Actions'-fanen i det nye repositoryet og aktiver workflows.
+
+4. **Kjør Workflow**: Utløs workflowen manuelt fra 'Actions'-fanen, eller la den kjøre automatisk ved push eller pull request.
+
+Husk å overvåke bruken av Actions for å unngå ekstra kostnader. 😊
+
+
+Oppgave 4 dokementasjon
+AWS Rekognition Integrasjon
+Applikasjonen bruker AWS Rekognition for å skanne bilder lagret i en AWS S3 Bucket for å oppdage PPE-brudd.
+
+Endepunkt
+GET /scan-ppe: Dette endepunktet tar en S3 Bucket-navn som parameter og returnerer analyseresultater av bilder for PPE-deteksjon.
+Installasjon og Kjøring
+For å kjøre applikasjonen med AWS Rekognition-funksjonalitet:
+Klone prosjektet fra git-repository.
+Sett opp AWS-referanser og S3 Bucket-detaljer i application.properties.
+Bruk mvn spring-boot:run for å starte applikasjonen.
+Bruk
+For å utføre en PPE-skanning på en S3 Bucket, send en GET-forespørsel til /scan-ppe med Bucket-navnet som parameter.
+
+
 Oppgave 5* Drøfte oppgaven.
 A. Kontinuerlig Integrering
 
